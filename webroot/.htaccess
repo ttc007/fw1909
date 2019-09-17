@@ -1,0 +1,4 @@
+<Files ~ "^\.ht">
+    Order allow,deny
+    Allow From All
+</Files>

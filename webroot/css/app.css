@@ -1,0 +1,32 @@
+.map-view{
+	width: 10000px;
+	height: 10000px;
+	position: absolute;
+}
+.camera{
+	width: 800px;
+	height: 600px;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	overflow: hidden;
+	position: relative;
+}
+.creep{
+	width: 35px;
+	height: 15px;
+	background: #7d2525;
+	position: absolute;
+	cursor: pointer;
+	font-size: .9em;
+	text-align: center;
+}
+
+.hero{
+	width: 15px;
+	height: 45px;
+	background: #333;
+	left: calc(50% - 10px);
+	top: calc(50% - 40px);
+	position: absolute;
+	z-index: 111;
+}
