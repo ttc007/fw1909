@@ -16,6 +16,8 @@
 	<script src="<?php echo webroot('js/component/map.js')?>"></script>
 	<script src="<?php echo webroot('js/component/creep.js')?>"></script>
 	<script src="<?php echo webroot('js/component/hero.js')?>"></script>
+	<script src="<?php echo webroot('js/component/skill.js')?>"></script>
+
 	<script src="<?php echo webroot('js/app.js')?>"></script>
 	
 </body>

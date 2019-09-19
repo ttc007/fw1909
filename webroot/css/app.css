@@ -19,14 +19,92 @@
 	cursor: pointer;
 	font-size: .9em;
 	text-align: center;
+    z-index: 10;
 }
 
 .hero{
-	width: 15px;
-	height: 45px;
-	background: #333;
-	left: calc(50% - 10px);
-	top: calc(50% - 40px);
+	width: 82px;
+    height: 90px;
+    left: -30px;
+    top: calc(50% - 40px);
+    position: absolute;
+    z-index: 11;
+}
+
+.widespread{
 	position: absolute;
-	z-index: 111;
+	width: 200px;
+	height: 100px;
+	background: red;
+	top: -50px;
+	left: -100px;
+	z-index: 1;
+	border-radius: 50%;
+}
+.container-skill{
+	position: relative;
+}
+.skill-screen{
+	background: #bbb;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background: #bbb;
+	padding:2px;
+	cursor: pointer;
+	bottom: 0;
+	position: absolute;
+}
+.skill-screen.active{
+	background: green;
+}
+.hero-container{
+	position: relative;
+    top: 50%;
+    left: 50%;
+}
+.singleSkill{
+	position: absolute;
+    width: 8px;
+    height: 8px;
+    background: red;
+    top: 0px;
+    left: 0px;
+    border-radius: 50%;
+    z-index: 111;
+}
+.skill{
+	position: relative;
+}
+.hero-icon{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	cursor: pointer;
+}
+.hero-img{
+	width: 40px;
+}
+.avatar-container{
+	position: fixed;
+    z-index: 1111;
+}
+.avatar-container img{
+	float: left;
+}
+.avatar-container p{
+	margin-top: 10px;
+	float:left;
+	position: relative;
+}
+.user-info{
+	position: absolute;
+	top: 40px;
+	left: 10px;
+	background: #c7d4c9;
+	border: 1px solid #bbb;
+	z-index: 111111111;
+}
+.link{
+	cursor: pointer;	
 }
