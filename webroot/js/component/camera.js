@@ -5,19 +5,19 @@ Vue.component('camera', {
   data: function () {
     return {
       hero:{
+        name:"a",
       	heroX: 400,
       	heroY: 300,
       	target: 100,
       	dame: 40,
       	exp:0,
-        expUpLevel:30,
+        expLevelUp:30,
       	level:1,
         creepTarget:{},
         creepDames:[],
         skill:true,
         action:"stand",
         autoAttack:true,
-        skillActive:2,
         skills:[],
         direction:" bottom",
         strength:20,
@@ -42,7 +42,7 @@ Vue.component('camera', {
         <div class="camera" :style="{width:width, height:height}" v-on:click="cameraClick">
           <div class='avatar-container'>
             <img class='hero-icon' src='webroot/img/camera/avatar.jpg' v-on:click='showHeroInfo'/>
-            <p>Level:{{hero.level}} - Exp: {{hero.exp}}/{{hero.expUpLevel}} </p>
+            <p>{{hero.name}} <br>Level:{{hero.level}} - Exp: {{hero.exp}}/{{hero.expLevelUp}} </p>
             <div class='user-info' v-show='isShowHeroInfo'>
               <table>
                 <tr><td>Tiềm năng</td><td>{{hero.potential}}</td><td></td></tr>
@@ -62,21 +62,34 @@ Vue.component('camera', {
              v-on:setTargetAttack='setTargetAttack'
             :creepTarget='hero.creepTarget'
           ></map-view>
-  				<hero :action='hero.action' v-on:updateCreepAttackAfterSkill='updateCreepAttackAfterSkill'
-            v-on:getAround='getAround' :creepTarget='hero.creepTarget' 
-            :heroX='hero.heroX' :heroY='hero.heroY' :heroTarget='hero.target' :skillActive='hero.skillActive'
-            v-on:autoAttack='autoAttack' v-on:setSkills='setSkills'
-            :direction='hero.direction'
-          ></hero>
+  				
 
           <div class='skill-container'>
             <img v-for='(skill,index) in hero.skills' :src='"webroot/img/camera/"+skill.name+".jpg"' class='skill-screen'
-             :style='{right: (index*40)+"px"}' :class="{active:hero.skillActive==skill.id}" v-on:click='changeSkill(skill)'/>
+             :style='{right: (index*40)+"px"}' :class="{active:hero.skill_view_1==skill.skill_id}" v-on:click='changeSkill(skill)' 
+             :title='skill.description'/>
           </div>
   			</div>
         
       </div>`,
+  mounted () {
+    this.initHero();
+  },
   methods:{
+    initHero:function(){
+      var _this = this;
+      $.ajax({
+        url:'api/hero/get',
+        type:'GET',
+        dataType:'json',
+        data:{
+          id:1
+        },
+        success:function(data){
+          _this.hero = data;
+        }
+      });
+    },
   	cameraClick: function(e){
       var _this = this;
       var isRunning = true;
@@ -87,7 +100,7 @@ Vue.component('camera', {
         var X = e.clientX - parseInt(_this.width)/2 ;
         var Y = e.clientY - parseInt(_this.height)/2;
 
-        console.log(e.clientX+"-"+e.clientY);
+        // console.log(e.clientX+"-"+e.clientY);
         if( e.clientY < 300 ) _this.hero.direction = 'top';
         else if( e.clientY > 370) _this.hero.direction = 'bottom';
         else if( e.clientX < 385) _this.hero.direction = 'left';
@@ -131,14 +144,6 @@ Vue.component('camera', {
         }, _this.T );
       }
   	},
-    setSkills:function(skills){
-      this.hero.skills = skills;
-      for(var i = 0; i < skills.length; i++){
-        if(skills[i].id==this.hero.skillActive) {
-          this.changeSkill(skills[i]);
-        }
-      }
-    },
     changeSkill(skill){
       this.hero.skillActive = skill.id;
       this.hero.target = skill.target;

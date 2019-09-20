@@ -4,43 +4,109 @@ Vue.component('map-view', {
   // This prop is called todo.
   data: function () {
     return {
-      creeps: [
-      	{id:1, top:'200px', left:"350px", heal:200, status:1, revive:0 , exp:20, maxHeal:200},
-      	{id:2, top:'100px', left:"50px", heal:150, status:1 , revive:0, exp:15, maxHeal:150},
-      	{id:3, top:'300px', left:"150px", heal:150, status:1, revive:0, exp:15, maxHeal:150},
-      	{id:4, top:'400px', left:"250px", heal:250, status:1, revive:0, exp:25, maxHeal:250},
-      	{id:5, top:'100px', left:"150px", heal:250, status:1, revive:0, exp:25, maxHeal:250}
-      ],
+      creeps: [],
       itv:0,
       isActtackMap:false,
-      creepActtackMap:{}
+      creepActtackMap:{},
+      hero:{
+        cX: 400,
+        cY: 300,
+        target: 100,
+        dame: 40,
+        exp:0,
+        expUpLevel:30,
+        level:1,
+        creepTarget:{},
+        creepDames:[],
+        skill:true,
+        action:"stand",
+        autoAttack:true,
+        skillActive:2,
+        skills:[],
+        direction:" bottom",
+        strength:20,
+        energy:30,
+        vitamin:25,
+        agi:20,
+        potential:0,
+      },
 
     }
   },
-  props:['top','left', 'hero', 'creepActtack', 'isActtack', 'isRunning'],
-  template: `<div class="map-view" :style="{top:top, left:left}">
-	  	<creep v-for='creep in creeps' :top="creep.top" :left="creep.left" :heal='creep.heal' :heroX='hero.heroX' :isRunning='isRunning'
-	  		:heroY='hero.heroY' :heroTarget='hero.target' v-on:actack='heroAttack' :creep='creep' v-on:updateCreepActtack='updateCreepActtack'
-	  		v-on:setTargetAttack='setTargetAttack'></creep>
+  props:['top','left', 'creepActtack', 'isActtack', 'isRunning'],
+  template: `<div class="map-view" :style="{top:top, left:left}" v-on:click='mapClick'>
+	  	<creep v-for='creep in creeps' :cX="creep.cX" :cY="creep.cY" :heal='creep.heal' v-on:setTargetAttack='setTargetAttack'></creep>
+      <hero :action='hero.action' :cX='hero.cX' :cY='hero.cY' :heroTarget='hero.target'
+        :skillActive='hero.skillActive'
+        v-on:getAround='getAround' :creepTarget='hero.creepTarget' 
+        v-on:autoAttack='autoAttack' v-on:setSkills='setSkills'
+        :direction='hero.direction'
+      ></hero>
   	</div>
   	`,
   mounted: function () {
   	var _this = this;
-	setInterval(function(){
-		for (var i = 0; i< _this.creeps.length; i++){
-			if(_this.creeps[i].status==0){
-				if(_this.creeps[i].revive==0) {
-					_this.creeps[i].revive = 1;
-				} else {
-					_this.creeps[i].revive = 0;
-					_this.creeps[i].status = 1;
-					_this.creeps[i].heal = _this.creeps[i].maxHeal;
-				}
-			}
-		}
-	},20000);	  
+	  _this.mapInit();	  
   },
   methods: {
+    mapInit:function(){
+      var _this = this;
+      $.ajax({
+        url:'api/map/get',
+        type:'GET',
+        dataType:'json',
+        data:{
+          id:1
+        },
+        success:function(data){
+          _this.creeps = data.creeps;
+        }
+      });
+    },
+    mapClick:function(e){
+      console.log(e);
+      var X = e.clientX - parseInt(_this.width)/2 ;
+      var Y = e.clientY - parseInt(_this.height)/2;
+
+      // console.log(e.clientX+"-"+e.clientY);
+      if( e.clientY < 300 ) _this.hero.direction = 'top';
+      else if( e.clientY > 370) _this.hero.direction = 'bottom';
+      else if( e.clientX < 385) _this.hero.direction = 'left';
+      else if( e.clientX > 445) _this.hero.direction = 'right';
+     
+      if(window.myInterval != undefined && window.myInterval != 'undefined'){
+        window.clearInterval(window.myInterval);
+      }
+      var stepX = Math.abs(X);
+      var stepY = Math.abs(Y);
+      var hypotenuse = Math.round(Math.sqrt(stepX*stepX + stepY*stepY));
+
+      var t = hypotenuse/_this.v;
+      _this.i = 0 ;
+
+      window.myInterval = setInterval(function(){
+        _this.hero.action = 'run';
+        _this.hero.autoAttack = false;
+        _this.i ++;
+          if(Y > 0 ){
+            _this.hero.cY = _this.hero.cY + parseFloat(_this.v*stepY/hypotenuse);
+          } else if(Y < 0) {
+            _this.hero.cY =  _this.hero.cY - parseFloat(_this.v*stepY/hypotenuse);
+          }
+
+          if(X > 0 ){
+            _this.hero.cX = _this.hero.cX + parseFloat(_this.v*stepX/hypotenuse);
+          } else if( X < 0) {
+            _this.mapLeft =( parseFloat(_this.mapLeft) + parseFloat(_this.v*stepX/hypotenuse)) + "px";
+            _this.hero.heroX = _this.hero.heroX - parseFloat(_this.v*stepX/hypotenuse);
+          }
+          if(_this.i>=t) {
+            window.clearInterval(window.myInterval);
+            _this.hero.action = 'stand';
+            _this.hero.autoAttack = true;
+          }
+      }, _this.T );
+    },
   	heroAttack:function(creep){
   		var _this = this;
   		if(_this.creepActtackMap.id != creep.id){
@@ -59,7 +125,36 @@ Vue.component('map-view', {
   	},
   	setTargetAttack:function(creep){
   		this.$emit("setTargetAttack", creep);
-  	}
+  	},
+    getAround:function(){
+      var _this = this;
+      var sX = Math.abs(parseInt(_this.hero.creepTarget.left) - _this.hero.heroX);
+      var sY = Math.abs(parseInt(_this.hero.creepTarget.top) - _this.hero.heroY);
+      if(sX < _this.hero.target && sY < _this.hero.target && this.hero.creepTarget.status == 1){
+        _this.hero.action = 'attack';
+      }
+    },
+    autoAttack:function(){
+      var _this = this;
+      if(_this.hero.autoAttack){
+        setTimeout(function(){
+          _this.hero.action = 'stand';
+        },400);
+      }
+    },
+    setSkills:function(skills){
+      this.hero.skills = skills;
+      for(var i = 0; i < skills.length; i++){
+        if(skills[i].id==this.hero.skillActive) {
+          this.changeSkill(skills[i]);
+        }
+      }
+    },
+    changeSkill(skill){
+      this.hero.skillActive = skill.id;
+      this.hero.target = skill.target;
+      this.hero.dame = skill.dame;
+    }
   },
   watch:{
   	creepActtack:function(){

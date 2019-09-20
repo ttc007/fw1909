@@ -2,7 +2,7 @@ Vue.component('creep', {
   // The todo-item component now accepts a
   // "prop", which is like a custom attribute.
   // This prop is called todo.
-  props: ['heal', 'top' , 'left', 'creep'],
+  props: ['heal', 'cX' , 'cY', 'creep'],
   data:function(){
   	return {
   		key:0,
@@ -10,7 +10,7 @@ Vue.component('creep', {
   	}
   },
   template: `
-  	<div class='creep' :style="{top:top, left:left, display:display}" v-on:click='$emit("setTargetAttack", creep)' :key='key'>{{heal}}</div>
+  	<div class='creep' :style="{top:cY+'px', left:cX+'px', display:display}" v-on:click='$emit("setTargetAttack", creep)' :key='key'>{{heal}}</div>
   `,
   methods:{
   	

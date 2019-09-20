@@ -2,9 +2,19 @@
 require_once "config/config.php";
 require_once "vendor/Logs/Log.php";
 require_once "vendor/HttpFoundation/Request.php";
+require_once "vendor/Model/Model.php";
+require_once "src/Model/Hero_skill.php";
+require_once "src/Model/Skill.php";
+require_once "src/Model/Hero.php";
+require_once "src/Model/Map.php";
+require_once "src/Model/Creep.php";
+require_once "src/Model/Map_creep.php";
+
+
 
 use vendor\HttpFoundation\Request;
 use vendor\Logs\Log;
+
 
 $uri = $_SERVER['REQUEST_URI'];
 Log::debug($uri);
@@ -23,7 +33,7 @@ if($prefix == "") {
 } elseif($prefix=='api') {
 	Log::debug($prefix);
 	$controllerClass = $controller.'Controller';
-	$controllerPath = "Controllers/API/".$controllerClass.".php";
+	$controllerPath = "src/Controllers/API/".$controllerClass.".php";
 	if(file_exists($controllerPath)){
 		require $controllerPath;
 		$cObj = new $controllerClass;

@@ -7,30 +7,24 @@ Vue.component('hero', {
   		topSkill:"-34px",
   		leftSkill:"5px",
   		targetAttack:{},
-  		skills:[
-  			{id:1, name:'namdam', target:40, dame:25},
-  			{id:2, name:'chuong', target:100, dame:40},
-  			{id:3, name:'thienNgoaiLuuTinh', target:100, dame:50}
-  		],
   		skillAction:0,
   		background:"url(webroot/img/camera/heroSprites.png)",
       backgroundPosition:"0 0",
       spriteIndexRun:0
   	}
   },
-  props: ['heroX', 'heroY', 'heroTarget', 'action', 'creepTarget', 'skillActive', 'direction'],
-  template: `<div class='hero-container' :style="{top:heroY, left:heroX}">
+  props: ['cX', 'cY', 'heroTarget', 'action', 'creepTarget', 'skillActive', 'direction'],
+  template: `<div class='hero-container' :style="{left:cX+'px', top:cY+'px'}">
   	<div class='container-skill'>
   		<skill :top='topSkill' :left="leftSkill" :skillAction='skillAction' v-on:setBackground='setBackground'
   		v-on:updateCreepAttackAfterSkill='updateCreepAttackAfterSkill' 
-  		:creepTarget='creepTarget' :heroX="heroX" :heroY="heroY" :heroTarget='heroTarget'></skill>
+  		:creepTarget='creepTarget'></skill>
   	</div>
   	<div class='hero' :style='{background:background,"background-position":backgroundPosition}'>
-      
     </div>
   </div>`,
   mounted: function () {
-  	this.$emit('setSkills', this.skills);
+    //
   },
   methods:{
   	getAround:function(){
