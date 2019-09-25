@@ -1,15 +1,22 @@
 <?php
 require_once "config/config.php";
-require_once "vendor/Logs/Log.php";
-require_once "vendor/HttpFoundation/Request.php";
-require_once "vendor/Model/Model.php";
-require_once "src/Model/Hero_skill.php";
-require_once "src/Model/Skill.php";
-require_once "src/Model/Hero.php";
-require_once "src/Model/Map.php";
-require_once "src/Model/Creep.php";
-require_once "src/Model/Map_creep.php";
+// require_once "vendor/Logs/Log.php";
+// require_once "vendor/HttpFoundation/Request.php";
+// require_once "vendor/Model/Model.php";
+// require_once "src/Model/Hero_skill.php";
+// require_once "src/Model/Skill.php";
+// require_once "src/Model/Hero.php";
+// require_once "src/Model/Map.php";
+// require_once "src/Model/Creep.php";
+// require_once "src/Model/Map_creep.php";
+spl_autoload_register(function($class){
+	$file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
 
+    $path = $file;
+    if (file_exists($path)) {
+        require_once $path;
+    }
+});
 
 
 use vendor\HttpFoundation\Request;

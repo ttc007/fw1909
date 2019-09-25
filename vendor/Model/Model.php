@@ -14,7 +14,7 @@ class Model
 		$db = new PDO("mysql:host=localhost;dbname=fw1909;charset=utf8", 'root', '');
 	    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		self::$db = $db;
-		self::$table = substr( get_called_class(),6 , 100);
+		self::$table = substr( get_called_class(), 10, 100);
 	}
 
 	public static function find($id){

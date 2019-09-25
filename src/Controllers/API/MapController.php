@@ -1,8 +1,8 @@
 <?php
 use vendor\Logs\Log;
-use Model\Map;
-use Model\Creep;
-use Model\Map_creep;
+use src\Model\Map;
+use src\Model\Creep;
+use src\Model\Map_creep;
 
 
 /**

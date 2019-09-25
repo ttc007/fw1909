@@ -84,3 +84,49 @@
 [Debug][2019-09-20 09:43:38am]:SELECT * FROM Creep WHERE id = :id
 [Debug][2019-09-20 09:43:38am]:SELECT * FROM Skill WHERE id = :id
 [Debug][2019-09-20 09:43:38am]:SELECT * FROM Skill WHERE id = :id
+[Debug][2019-09-23 06:14:13pm]:/
+[Debug][2019-09-23 06:14:55pm]:/
+[Debug][2019-09-23 07:04:13pm]:/
+[Debug][2019-09-23 07:04:53pm]:/
+[Debug][2019-09-23 07:05:38pm]:/
+[Debug][2019-09-24 12:00:36pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:00:36pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:00:36pm]:api
+[Debug][2019-09-24 12:00:36pm]:api
+[Debug][2019-09-24 12:01:14pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:01:14pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:01:14pm]:/fw1909/fw1909/api/hero/get?id=1
+[Debug][2019-09-24 12:01:14pm]:api
+[Debug][2019-09-24 12:01:16pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:01:17pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:01:17pm]:/fw1909/fw1909/api/hero/get?id=1
+[Debug][2019-09-24 12:01:17pm]:api
+[Debug][2019-09-24 12:01:23pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:01:23pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:01:23pm]:api
+[Debug][2019-09-24 12:01:23pm]:api
+[Debug][2019-09-24 12:02:37pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:02:37pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:02:37pm]:/fw1909/fw1909/api/hero/get?id=1
+[Debug][2019-09-24 12:02:37pm]:api
+[Debug][2019-09-24 12:03:46pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:03:46pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:03:46pm]:api
+[Debug][2019-09-24 12:03:46pm]:api
+[Debug][2019-09-24 12:03:46pm]:SELECT * FROM del\Map WHERE id = :id
+[Debug][2019-09-24 12:03:46pm]:SELECT * FROM del\Hero WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:/fw1909/fw1909/
+[Debug][2019-09-24 12:04:35pm]:/fw1909/fw1909/api/map/get?id=1
+[Debug][2019-09-24 12:04:35pm]:api
+[Debug][2019-09-24 12:04:35pm]:api
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Map WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Hero WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Map_creep WHERE map_id= ?
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Hero_skill WHERE hero_id= ?
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Creep WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Skill WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Creep WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Creep WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Skill WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Creep WHERE id = :id
+[Debug][2019-09-24 12:04:35pm]:SELECT * FROM Creep WHERE id = :id

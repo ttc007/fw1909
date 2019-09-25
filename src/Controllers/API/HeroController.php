@@ -1,8 +1,8 @@
 <?php
 use vendor\Logs\Log;
-use Model\Hero;
-use Model\Hero_skill;
-use Model\Skill;
+use src\Model\Hero;
+use src\Model\Hero_skill;
+use src\Model\Skill;
 
 
 /**

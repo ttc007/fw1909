@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace src\Model;
 use vendor\Model\Model;
 
 /**
